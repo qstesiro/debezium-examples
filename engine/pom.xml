@@ -1,0 +1,82 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>io.debezium.examples.engine</groupId>
+  <artifactId>engine-demo</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <name>engine demo</name>
+
+  <properties>
+    <!-- <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding> -->
+    <!-- <maven.compiler.source>1.8</maven.compiler.source> -->
+    <!-- <maven.compiler.target>1.8</maven.compiler.target> -->
+
+    <!-- <database.hostname>localhost</database.hostname> -->
+    <!-- <database.port>5432</database.port> -->
+    <!-- <database.user>postgres</database.user> -->
+    <!-- <database.password>postgres</database.password> -->
+    <!-- <database.dbname>postgres</database.dbname> -->
+    <!-- <database.schema>inventory</database.schema> -->
+
+    <!-- <smtp.hostname>localhost</smtp.hostname> -->
+    <!-- <smtp.port>1025</smtp.port> -->
+    <!-- <smtp.ui>8025</smtp.ui> -->
+
+    <!-- <mysql.init.timeout>30000</mysql.init.timeout> -->
+
+    <version.camel>3.0.1</version.camel>
+    <version.debezium>1.7.1.Final</version.debezium>
+    <version.debezium.tag>1.8</version.debezium.tag>
+    <version.postgresql.driver>42.3.3</version.postgresql.driver>
+    <version.org.slf4j>1.7.29</version.org.slf4j>
+    <version.quarkus>1.2.0.Final</version.quarkus>
+    <version.jackson>2.9.1</version.jackson>
+    <version.kafka>2.4.0</version.kafka>
+    <version.plugin.docker>0.31.0</version.plugin.docker>
+    <version.plugin.shade>3.2.1</version.plugin.shade>
+
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+
+  </properties>
+
+  <dependencies>
+
+    <dependency>
+      <groupId>io.debezium</groupId>
+      <artifactId>debezium-api</artifactId>
+      <version>${version.debezium}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.debezium</groupId>
+      <artifactId>debezium-embedded</artifactId>
+      <version>${version.debezium}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.debezium</groupId>
+      <artifactId>debezium-connector-mysql</artifactId>
+      <version>${version.debezium}</version>
+    </dependency>
+
+    <!-- logging -->
+    <!-- <dependency> -->
+    <!--   <groupId>org.apache.logging.log4j</groupId> -->
+    <!--   <artifactId>log4j-api</artifactId> -->
+    <!--   <version>${log4j2-version}</version> -->
+    <!-- </dependency> -->
+    <!-- <dependency> -->
+    <!--   <groupId>org.apache.logging.log4j</groupId> -->
+    <!--   <artifactId>log4j-core</artifactId> -->
+    <!--   <version>${log4j2-version}</version> -->
+    <!-- </dependency> -->
+    <!-- <dependency> -->
+    <!--   <groupId>org.apache.logging.log4j</groupId> -->
+    <!--   <artifactId>log4j-slf4j-impl</artifactId> -->
+    <!--   <version>${log4j2-version}</version> -->
+    <!-- </dependency> -->
+
+  </dependencies>
+
+</project>
