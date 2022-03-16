@@ -10,12 +10,41 @@ import io.debezium.engine.DebeziumEngine;
 import io.debezium.engine.format.Json;
 import  io.debezium.engine.ChangeEvent;
 
+/*
+  docker run \
+      --name mysql \
+      --network dbz \
+      --network-alias mysql \
+      -p 3306:3306 \
+      -e MYSQL_ROOT_PASSWORD=debezium \
+      -e MYSQL_USER=mysqluser \
+      -e MYSQL_PASSWORD=mysqluser \
+      --rm -d \
+      debezium/example-mysql:1.7
+
+   # 客户端
+   docker run \
+       --net host \
+       -it --rm \
+       debezium/example-mysql:1.7 \
+       mysql -h127.0.0.1 \
+       -P3306 \
+       -umysqluser \
+       -pmysqluser \
+       -Dinventory \
+       --prompt 'mysqluser> '
+ */
+
 public final class EngineDemo {
 
     public static void main(String[] args) throws Exception {
         new EngineDemo().run();
     }
 
+    /*
+      rm -f /tmp/dbz-demo-81002127.offset
+      rm -f /tmp/dbz-demo-81002127.dbhistory
+     */
     private void run() throws Exception {
         // Define the configuration for the Debezium Engine with MySQL connector...
         final Properties props = Configuration.create().build().asProperties();
@@ -24,28 +53,29 @@ public final class EngineDemo {
         props.setProperty("offset.storage", "org.apache.kafka.connect.storage.FileOffsetBackingStore");
         {
             // 文件
-            // props.setProperty("offset.storage.file.filename", "/tmp/dbz-demo-81002127.offset");
-            // props.setProperty("offset.flush.interval.ms", "1000");
-            // Kafka
-            props.setProperty("bootstrap.servers", "127.0.0.1:9092");
-            props.setProperty("offset.storage", "org.apache.kafka.connect.storage.KafkaOffsetBackingStore");
-            props.setProperty("offset.storage.topic", "dbz-demo-81002127.offset");
-            props.setProperty("offset.storage.partitions", "1");
-            props.setProperty("offset.storage.replication.factor", "1");
+            props.setProperty("offset.storage.file.filename", "/tmp/dbz-demo-81002127.offset");
             props.setProperty("offset.flush.interval.ms", "1000");
+            // Kafka
+            // props.setProperty("bootstrap.servers", "127.0.0.1:9092");
+            // props.setProperty("offset.storage", "org.apache.kafka.connect.storage.KafkaOffsetBackingStore");
+            // props.setProperty("offset.storage.topic", "dbz-demo-81002127.offset");
+            // props.setProperty("offset.storage.partitions", "1");
+            // props.setProperty("offset.storage.replication.factor", "1");
+            // props.setProperty("offset.flush.interval.ms", "1000");
         }
         /* begin connector properties */
         {
             // 文件
-            // props.setProperty("database.history", "io.debezium.relational.history.FileDatabaseHistory");
-            // props.setProperty("database.history.file.filename", "/tmp/dbz-demo-81002127.dbhistory");
+            props.setProperty("database.history", "io.debezium.relational.history.FileDatabaseHistory");
+            props.setProperty("database.history.file.filename", "/tmp/dbz-demo-81002127.dbhistory");
             // Kafka
-            props.setProperty("database.history.kafka.bootstrap.servers", "127.0.0.1:9092");
-            props.setProperty("database.history.kafka.topic", "dbz-demo-81002127.dbhistory");
-            props.setProperty("database.history", "io.debezium.relational.history.KafkaDatabaseHistory");
+            // props.setProperty("database.history.kafka.bootstrap.servers", "127.0.0.1:9092");
+            // props.setProperty("database.history.kafka.topic", "dbz-demo-81002127.dbhistory");
+            // props.setProperty("database.history", "io.debezium.relational.history.KafkaDatabaseHistory");
         }
         // mysql properties
         props.setProperty("database.server.id", "81002127");
+        props.setProperty("tombstones.on.delete", "false");
         props.setProperty("database.server.name", "dbz-demo-81002127");
         props.setProperty("database.hostname", "localhost");
         props.setProperty("database.port", "3306");

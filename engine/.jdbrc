@@ -1,5 +1,8 @@
 use /home/qstesiro/github.com/qstesiro/debezium-examples/engine/src/main/java
 
-stop in io.debezium.examples.engine.EngineDemo.main(java.lang.String[])
+run
 
-cont
+# stop in io.debezium.examples.engine.EngineDemo.main(java.lang.String[])
+# stop at io.debezium.examples.engine.EngineDemo:79
+
+# cont
