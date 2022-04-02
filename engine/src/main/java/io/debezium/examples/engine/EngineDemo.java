@@ -11,7 +11,7 @@ import io.debezium.engine.format.Json;
 import  io.debezium.engine.ChangeEvent;
 
 /*
-  docker run \
+  docker run       \
       --name mysql \
       --network dbz \
       --network-alias mysql \
@@ -50,6 +50,8 @@ public final class EngineDemo {
         final Properties props = Configuration.create().build().asProperties();
         props.setProperty("name", "dbz-demo");
         props.setProperty("connector.class", "io.debezium.connector.mysql.MySqlConnector");
+        props.setProperty("key.converter.schemas.enable", "false");
+        props.setProperty("value.converter.schemas.enable", "false");
         props.setProperty("offset.storage", "org.apache.kafka.connect.storage.FileOffsetBackingStore");
         {
             // 文件
@@ -77,10 +79,26 @@ public final class EngineDemo {
         props.setProperty("database.server.id", "81002127");
         props.setProperty("tombstones.on.delete", "false");
         props.setProperty("database.server.name", "dbz-demo-81002127");
-        props.setProperty("database.hostname", "localhost");
+        // 可以获取全局锁
+        // props.setProperty("database.hostname", "localhost");
+        // props.setProperty("database.port", "3306");
+        // props.setProperty("database.user", "debezium");
+        // props.setProperty("database.password", "dbz");
+        // props.setProperty("database.include.list", "inventory");
+        // props.setProperty("table.include.list", "inventory.customers");
+        // props.setProperty("snapshot.include.collection.list", "inventory.customers");
+        // 不能获取全局锁
+        props.setProperty("database.hostname", "10.138.228.243");
         props.setProperty("database.port", "3306");
         props.setProperty("database.user", "debezium");
-        props.setProperty("database.password", "dbz");
+        props.setProperty("database.password", "vWrqedsPyIxll1A1yL");
+        props.setProperty("database.include.list", "console");
+        props.setProperty("table.include.list", "console.rule_account");
+        props.setProperty("snapshot.include.collection.list", "console.rule_account");
+        //
+        props.setProperty("include.query", "true");
+        props.setProperty("tombstones.on.delete", "false");
+        props.setProperty("snapshot.locking.mode", "minimal");
         for (String k : props.stringPropertyNames()) {
             System.out.printf("%s: %s\n", k, props.getProperty(k));
         }

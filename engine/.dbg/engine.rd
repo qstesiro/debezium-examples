@@ -3,7 +3,7 @@
     # 正常运行
     alias mvn='mvn compile exec:java -Dexec.mainClass=io.debezium.examples.engine.EngineDemo'
     # 调试运行
-    alias mvn='set -m; mvnDebug compile exec:java -Dexec.mainClass=io.debezium.examples.engine.EngineDemo & pid=$!; jdb -connect com.sun.jdi.SocketAttach:hostname=localhost,port=1025; set +m; kill -SIGTERM -- -$pid'
+    alias mvn='rm -f /tmp/dbz-demo-81002127.offset; rm -f /tmp/dbz-demo-81002127.dbhistory; set -m; mvnDebug compile exec:java -Dexec.mainClass=io.debezium.examples.engine.EngineDemo & pid=$!; jdb -connect com.sun.jdi.SocketAttach:hostname=localhost,port=1025; set +m; kill -SIGTERM -- -$pid'
 }
 
 # kafka

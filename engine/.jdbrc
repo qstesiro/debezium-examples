@@ -1,8 +1,17 @@
-use /home/qstesiro/github.com/qstesiro/debezium-examples/engine/src/main/java
+version
 
-run
+use /home/qstesiro/github.com/qstesiro/debezium-examples/engine/src/main/java:/home/qstesiro/github.com/qstesiro/debezium/debezium-core/src/main/java:/home/qstesiro/github.com/qstesiro/debezium/debezium-connector-mysql/src/main/java
 
 # stop in io.debezium.examples.engine.EngineDemo.main(java.lang.String[])
 # stop at io.debezium.examples.engine.EngineDemo:79
+# stop at io.debezium.relational.RelationalSnapshotChangeEventSource:91
+stop at io.debezium.relational.RelationalSnapshotChangeEventSource:109
+stop at io.debezium.relational.RelationalSnapshotChangeEventSource:115
+stop at io.debezium.relational.RelationalSnapshotChangeEventSource:118
+stop at io.debezium.relational.RelationalSnapshotChangeEventSource:122
+stop at io.debezium.relational.RelationalSnapshotChangeEventSource:136
+# stop at io.debezium.pipeline.source.AbstractSnapshotChangeEventSource:190
+# stop at io.debezium.pipeline.source.AbstractSnapshotChangeEventSource:205
+# stop at io.debezium.connector.mysql.MySqlSnapshotChangeEventSource:175
 
-# cont
+cont
