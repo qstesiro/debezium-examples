@@ -29,8 +29,8 @@ import  io.debezium.engine.ChangeEvent;
        debezium/example-mysql:1.7 \
        mysql -h127.0.0.1 \
        -P3306 \
-       -umysqluser \
-       -pmysqluser \
+       -uroot \
+       -pdebezium \
        -Dinventory \
        --prompt 'mysqluser> '
  */
@@ -79,26 +79,28 @@ public final class EngineDemo {
         props.setProperty("database.server.id", "81002127");
         props.setProperty("tombstones.on.delete", "false");
         props.setProperty("database.server.name", "dbz-demo-81002127");
-        // 可以获取全局锁
-        // props.setProperty("database.hostname", "localhost");
+        // 锁模式
+        // props.setProperty("snapshot.locking.mode", "minimal");
+        props.setProperty("snapshot.locking.mode", "none");
+        // 全局锁
+        props.setProperty("database.hostname", "localhost");
+        props.setProperty("database.port", "3306");
+        props.setProperty("database.user", "root");
+        props.setProperty("database.password", "debezium");
+        props.setProperty("database.include.list", "inventory");
+        props.setProperty("table.include.list", "inventory.customers");
+        props.setProperty("snapshot.include.collection.list", "inventory.customers");
+        // 表锁
+        // props.setProperty("database.hostname", "10.138.228.243");
         // props.setProperty("database.port", "3306");
         // props.setProperty("database.user", "debezium");
-        // props.setProperty("database.password", "dbz");
-        // props.setProperty("database.include.list", "inventory");
-        // props.setProperty("table.include.list", "inventory.customers");
-        // props.setProperty("snapshot.include.collection.list", "inventory.customers");
-        // 不能获取全局锁
-        props.setProperty("database.hostname", "10.138.228.243");
-        props.setProperty("database.port", "3306");
-        props.setProperty("database.user", "debezium");
-        props.setProperty("database.password", "vWrqedsPyIxll1A1yL");
-        props.setProperty("database.include.list", "console");
-        props.setProperty("table.include.list", "console.rule_account");
-        props.setProperty("snapshot.include.collection.list", "console.rule_account");
+        // props.setProperty("database.password", "vWrqedsPyIxll1A1yL");
+        // props.setProperty("database.include.list", "console");
+        // props.setProperty("table.include.list", "console.rule_account");
+        // props.setProperty("snapshot.include.collection.list", "console.rule_account");
         //
         props.setProperty("include.query", "true");
         props.setProperty("tombstones.on.delete", "false");
-        props.setProperty("snapshot.locking.mode", "minimal");
         for (String k : props.stringPropertyNames()) {
             System.out.printf("%s: %s\n", k, props.getProperty(k));
         }
